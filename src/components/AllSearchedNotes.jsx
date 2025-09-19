@@ -1,8 +1,21 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 
-function AllTaggedNotes({notes, tagName, archiveNotes}) {
-    const filteredNotes = notes.filter(obj => obj.tag.includes(tagName));
+function AllSearchedNotes({notes, archiveNotes}) {
+    const [searchParam, setSearchParam] = useSearchParams();
+    const searchStr = searchParam.get("search") || "";
+    const searchTag = searchStr.split(" ")[0] || "";
+
+    const filteredNotes = notes.filter((obj) => {
+        const lowerSearch = searchStr.toLowerCase();
+        const lowerTag = searchTag.toLowerCase();
+
+        return (
+            obj.tag.some((t) => t.toLowerCase().includes(lowerTag)) ||
+            obj.title.toLowerCase().includes(lowerSearch) ||
+            obj.noteMessage.toLowerCase().includes(lowerSearch)
+        );
+    });
     // console.log("filter tag data:- ",filteredNotes);
     
   return (
@@ -33,4 +46,4 @@ function AllTaggedNotes({notes, tagName, archiveNotes}) {
   )
 }
 
-export default AllTaggedNotes
+export default AllSearchedNotes

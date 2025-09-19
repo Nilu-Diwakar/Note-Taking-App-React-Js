@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-function AllNotesCards({notes}) {
+function AllNotesCards({notes, archiveNotes}) {
 
   return (
     <div className='w-full flex flex-col divide-y divide-neutral-300'>
@@ -9,7 +9,7 @@ function AllNotesCards({notes}) {
             notes.length >0 ?
             (
                 notes.map((obj) => (
-                    <NavLink to={`/notes/${obj.id}`} key={obj.id} className="flex flex-col rounded-lg p-2 space-y-3">
+                    <NavLink to={archiveNotes? `/archives/${obj.id}` : `/notes/${obj.id}`} key={obj.id} className="flex flex-col rounded-lg p-2 space-y-3">
                     <p className="font-semibold text-base">{obj?.title}</p>
                     
                     <div className="flex flex-wrap gap-1">

@@ -3,11 +3,11 @@ import NoteForm from './NoteForm'
 
 function CreateNotes() {
   return (
-    <div className='flex w-full h-full'>
-        <div className="flex-1 p-2 border border-neutral-200">
+    <div className='flex w-full h-full pb-10'>
+        <div className="flex-1">
             <NoteForm />
         </div>
-        <div className=" w-[200px]"></div>
+        <div className="hidden lg:block w-[200px]"></div>
     </div>
   )
 }

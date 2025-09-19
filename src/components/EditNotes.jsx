@@ -15,8 +15,8 @@ function EditNotes() {
     const [showArchiveWarning , setShowArchiveWarning] = useState(false);
 
   return (
-    <div className='w-full h-full flex'>
-        <div className="flex-1 p-2 border border-neutral-200">
+    <div className='w-full h-full lg:overflow-y-auto flex pb-10'>
+        <div className="flex-1 border border-neutral-200">
             {
                 index <0 ?
                 (
@@ -30,7 +30,7 @@ function EditNotes() {
                 ) :
                 (
                     <>
-                        <div className='flex justify-between items-center pt-2 lg:hidden'>
+                        <div className='flex justify-between items-center px-6 pt-2 lg:hidden'>
                             <NavLink to={"/"} className='flex items-center gap-x-2'>
                             <img src={icons.arrowRight} alt="arrowLeft-icon" className='rotate-180 w-4'/>
                             <p className='text-xs'>Go Back</p>
@@ -53,7 +53,7 @@ function EditNotes() {
         <div className="p-2 space-y-3 hidden lg:flex flex-col w-[200px]">
             <button className='inline-flex items-center gap-2 rounded-md text-sm font-medium focus:outline-none h-9 px-4 py-2 w-full justify-start hover:cursor-pointer border-[1.5px] border-borderClr' onClick={() =>setShowArchiveWarning(true)}>
                 <img src={icons.archive} alt="archive-icon" className='w-4'/>
-                <span className='text-neutral-950 text-sm font-normal'>Archive Note</span>
+                <span className='text-neutral-950 text-sm font-normal'>{archiveStatus? "Unarchive Note" : "Archive Note"}</span>
             </button>
             <button className='inline-flex items-center gap-2 rounded-md text-sm font-medium focus:outline-none h-9 px-4 py-2 w-full justify-start hover:cursor-pointer border-[1.5px] border-borderClr' onClick={() =>setShowDeleteWarning(true)}>
                 <img src={icons.trash} alt="trash-icon" className='w-4'/>

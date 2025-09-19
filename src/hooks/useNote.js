@@ -8,9 +8,31 @@ function useNote() {
   const navigation = useNavigate();
 
   // console.log("inside useNote");
-  function createHandler(e, noteData, setNoteData) {
+
+  function validateNote(noteData) {
+    let errs = {};
+    if (!noteData.title.trim() || noteData.title.trim().length < 2) {
+      errs.title = "Title must contain at least 2 characters";
+    }
+    if (!noteData.tag.trim() || noteData.tag.trim().length < 2) {
+      errs.tag = "Tag must contain at least 2 characters";
+    }
+    if (!noteData.noteMessage.trim() || noteData.noteMessage.trim().length < 2) {
+      errs.noteMessage = "Note must contain at least 2 characters";
+    }
+    return errs;
+  }
+
+  function createHandler(e, noteData, setNoteData, setErrors) {
     e.preventDefault();
     console.log("inside createHandler");
+    const errs = validateNote(noteData);
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs); // show errors in UI
+      return; // stop execution
+    }
+
+    setErrors({ title: "", tag: "", noteMessage: "" }); // clear errors
     const tagsArray = noteData.tag.split(",").map((tag) => tag.trim());
 
     const updatedNote = {
@@ -48,8 +70,15 @@ function useNote() {
     navigation(`/notes/${updatedNote.id}`);
   }
 
-  function updateHandler(e, noteData, setNoteData) {
+  function updateHandler(e, noteData, setNoteData, setErrors) {
     e.preventDefault();
+    const errs = validateNote(noteData);
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+
+    setErrors({ title: "", tag: "", noteMessage: "" });
     const tagsArray = noteData.tag.split(",").map((tag) => tag.trim());
 
     const updatedNote = {

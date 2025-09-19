@@ -16,13 +16,12 @@ const router = createBrowserRouter(
       children:[
         {
           // in case of Layouts, not path is needed -> they alaways rendered with child if route is matched
-          element: <NoteLayout />,
+          element: <NoteLayout archiveNotes={false}/>,
           children:
           [
             {
               index: true,
               element : <AllNotes />,
-              // element: <Navigate to="notes" replace />,
             },
             {
               path: "notes",
@@ -42,24 +41,23 @@ const router = createBrowserRouter(
           ],
         },
         // Archive ROutes:-
-        // {
-        //   element: <NoteLayout/>,
-        //   children:
-        //   [
-        //     {
-        //       path: "archives",
-        //       // element : <ArchivedNotes />,
-        //       element : <div>working on archive</div>,
-        //       children:
-        //       [
-        //         {
-        //           path: ":noteId",
-        //           element: <EditNotes />,
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // },
+        {
+          element: <NoteLayout archiveNotes={true}/>,
+          children:
+          [
+            {
+              path: "archives",
+              element : <ArchivedNotes />,
+              children:
+              [
+                {
+                  path: ":noteId",
+                  element: <EditNotes />,
+                },
+              ],
+            },
+          ],
+        },
       ]
     }
   ]
