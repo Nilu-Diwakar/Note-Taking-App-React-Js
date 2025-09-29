@@ -3,6 +3,7 @@ import icons from '../icons/index';
 import useNote from '../hooks/useNote';
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
+import Icons from '../icons/index';
 
 function NoteForm({noteId, archiveStatus}) {
     const {createHandler, updateHandler} = useNote();
@@ -32,12 +33,6 @@ function NoteForm({noteId, archiveStatus}) {
             }
         });
 
-        // // simple validation
-        // if (e.target.value.trim().length < 2) {
-        // setErrors((prev) => ({ ...prev, [e.target.name]: "String must contain at least 2 character(s)" }));
-        // } else {
-        // setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
-        // }
     };
 
 
@@ -50,38 +45,38 @@ function NoteForm({noteId, archiveStatus}) {
                 errors.title && 
                 (
                     <div className="flex gap-x-2">
-                        <img src={icons.exclamation} alt="exclamation-icon" />
-                        <p className='text-[0.8rem] font-medium text-red-400'>String must contain at least 2 character(s)</p>
+                        {/* <img src={icons.exclamation} alt="exclamation-icon" /> */}
+                        <Icons.Exclamation />
+                        <p className='text-[0.8rem] font-medium text-red-400'>{errors.title}</p>
                     </div>
                 )
             }
             
 
             <div className='mt-3 flex items-center gap-x-2'>
-                <div className='flex items-center py-1 gap-x-2 w-29 pr-20'>
-                    <img src={icons.tag} alt="tag-icon" className='w-4 h-4'/>
+                <div className='flex items-center py-1 gap-x-2 w-29 pr-15'>
+                    {/* <img src={icons.tag} alt="tag-icon" className='w-4 h-4'/> */}
+                    <Icons.Tag className="w-4"/>
                     <p className='text-sm font-normal text-neutral-700'>Tags</p>
                 </div>
 
                 <input type="text" name='tag' value={noteData.tag} placeholder='Add tags separated by commas (e.g. Work, Planning)' className={`w-full text-xs font-normal ${noteId ? "focus:border-b-[1.5px]  h-auto" : "focus:border-[1.5px] h-9 px-3 py-1 rounded-md"} focus:outline-none`} onChange={changeHandler}/>
             </div>
-            {/* <div className='flex gap-x-2 ml-30'>
-                <img src={icons.exclamation} alt="exclamation-icon" />
-                <p className='text-[0.8rem] font-medium text-red-400'>String must contain at least 2 character(s)</p>
-            </div> */}
             {
                 errors.tag && 
                 (
                     <div className="flex gap-x-2">
-                        <img src={icons.exclamation} alt="exclamation-icon" />
-                        <p className='text-[0.8rem] font-medium text-red-400'>String must contain at least 2 character(s)</p>
+                        {/* <img src={icons.exclamation} alt="exclamation-icon" /> */}
+                        <Icons.Exclamation />
+                        <p className='text-[0.8rem] font-medium text-red-400'>{errors.tag}</p>
                     </div>
                 )
             }
 
             <div className={`${archiveStatus ? "flex" : "hidden"} items-center`}>
                 <div className='flex items-center py-1 gap-x-2 w-29'>
-                    <img src={icons.status} alt="clock-icon" className='w-4 h-4'/>
+                    {/* <img src={icons.status} alt="clock-icon" className='w-4 h-4'/> */}
+                    <Icons.Status className="w-4"/>
                     <p className='text-sm font-normal text-neutral-700'>Status</p>
                 </div>
                 <span className='text-xs font-normal text-neutral-950'>Archived</span>
@@ -89,7 +84,8 @@ function NoteForm({noteId, archiveStatus}) {
 
             <div className='flex items-center'>
                 <div className='flex items-center py-1 gap-x-2 w-29'>
-                    <img src={icons.clock} alt="clock-icon" className='w-4 h-4'/>
+                    {/* <img src={icons.clock} alt="clock-icon" className='w-4 h-4'/> */}
+                    <Icons.Clock className="w-4"/>
                     <p className='text-sm font-normal text-neutral-700'>Last Edited</p>
                 </div>
                 <span className='text-xs font-normal text-neutral-950'>{noteData.updateDate}</span>
@@ -97,14 +93,15 @@ function NoteForm({noteId, archiveStatus}) {
         </div>
 
 
-        <div className="px-6 py-4 mt-3 flex-1 flex flex-col border-t border-neutral-200">
-            <textarea name='noteMessage' value={noteData.noteMessage} placeholder='Start typing your note here...' className="flex-1 w-full resize-none rounded-md px-3 text-base font-normal text-neutral-800 leading-6 focus:border-[1.5px] focus:outline-none" onChange={changeHandler}/>
+        <div className="px-6 py-4 mt-3 flex-1 flex flex-col border-t border-[#e0e4ea]">
+            <textarea name='noteMessage' value={noteData.noteMessage} placeholder='Start typing your note here...' className="flex-1 w-full resize-none rounded-md px-3 text-base font-normal leading-6 focus:border-[1.5px] focus:outline-none" onChange={changeHandler}/>
             {
                 errors.noteMessage && 
                 (
                     <div className="flex gap-x-2">
-                        <img src={icons.exclamation} alt="exclamation-icon" />
-                        <p className='text-[0.8rem] font-medium text-red-400'>String must contain at least 2 character(s)</p>
+                        {/* <img src={icons.exclamation} alt="exclamation-icon" /> */}
+                        <Icons.Exclamation />
+                        <p className='text-[0.8rem] font-medium text-red-400'>{errors.noteMessage}</p>
                     </div>
                 )
             }
@@ -114,18 +111,18 @@ function NoteForm({noteId, archiveStatus}) {
                     noteId ? 
                     (
                         <>
-                        <button className="text-sm font-medium text-neutral-0 bg-blue-500 hover:cursor-pointer px-4 py-2 rounded-lg mr-2">
+                        <button className="text-sm font-medium text-[#f8fafc] bg-blue-500 hover:bg-neutral-700 hover:text-neutral-50 hover:cursor-pointer px-4 py-2 rounded-lg mr-2">
                             Update
                         </button>
                         <NavLink to={"/"}>
-                            <button className="text-sm font-medium text-neutral-600 bg-neutral-200 hover:cursor-pointer px-4 py-2 rounded-lg">
+                            <button className="text-sm font-medium text-[#0e121b] bg-[#e0e4ea] hover:bg-neutral-500 hover:text-neutral-950 hover:cursor-pointer px-4 py-2 rounded-lg">
                             Cancel
                             </button>
                         </NavLink>
                         </>
                     ) : 
                     (
-                        <button className="text-sm font-medium text-white bg-black hover:cursor-pointer px-4 py-2 rounded-lg">
+                        <button className="text-sm font-medium text-neutral-0 bg-neutral-950 hover:bg-neutral-0/5 hover:text-neutral-950 hover:cursor-pointer hover:border-[1.5px] border-borderClr-hover px-4 py-2 rounded-lg">
                         Submit
                         </button>
                     )

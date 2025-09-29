@@ -17,25 +17,28 @@ function ArchivedNotes() {
 
   return (
     <div className='w-full h-full flex'>
-        <div className={`${outlet ? "hidden lg:block" : "block"} w-full lg:max-w-[230px] px-4 pt-5`}>
-          <div className='divide-y divide-neutral-200 pb-15'>
-            {/* All NoteCards.jsx */}
-            {
-              searchKey === undefined &&
-              <AllNotesCards notes={archivedNotes} archiveNotes={archiveNotes}/>
-            }
-            {
-              searchKey === "tag" &&
-              <AllTaggedNotes notes={archivedNotes} tagName={tagName} archiveNotes={archiveNotes}/>
-            }
-            {
-              searchKey === "search" &&
-              <AllSearchedNotes notes={archivedNotes} archiveNotes={archiveNotes}/>
-            }
+        <div className={`${outlet ? "hidden lg:block" : "block"} w-full lg:max-w-[290px] border-r border-neutral-200`}>
+
+          <div className='border-r border-neutral-200 px-8 pt-5'>
+            <div className='pb-15'>
+              {/* All NoteCards.jsx */}
+              {
+                searchKey === undefined &&
+                <AllNotesCards notes={archivedNotes} archiveNotes={archiveNotes}/>
+              }
+              {
+                searchKey === "tag" &&
+                <AllTaggedNotes notes={archivedNotes} tagName={tagName} archiveNotes={archiveNotes}/>
+              }
+              {
+                searchKey === "search" &&
+                <AllSearchedNotes notes={archivedNotes} archiveNotes={archiveNotes}/>
+              }
+            </div>
           </div>
         </div>
 
-        <div className="h-full w-full">
+        <div className={`${outlet ?"block" : "hidden lg:block"} h-full w-full`}>
             <Outlet />
         </div>
     </div>
